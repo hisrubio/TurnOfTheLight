@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Mi Extension",
+  "version": "1.0",
+ 
+  "description": "A plain text description",
+   "background": {
+    "scripts": ["popup.js"]
+    
+  },
+  "browser_action": {
+    //"default_popup" : "popup.html",
+    "default_title" : "mi Extension"
+    },
+   "permissions": [
+      "tabs"
+  ]
+}
