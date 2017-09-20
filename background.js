@@ -1,21 +1,32 @@
 
 
+var pages = [
+    /www.netflix.com/i,
+    /www.plusdede.com/i,
+    /es.hboespana.com/i
+];//buscar lo de entre las barrras y la i no importan Mays o minusculas
+var check=true;
+
 mirar();
 function mirar(){
 	chrome.tabs.query({ active: true, lastFocusedWindow: true }, function(tabs) {
 	    // and use that tab to fill in out title and url
-	    var x="http://www.filmaffinity.com/es/main.html";
-	    var tab = tabs[0].url;
-	   // console.log(tab.url);
-	   // alert(tab);
 	    
-	if(x==tab)	   
-		alert("yes");
-	else
-		mirar();
-
+		var currentPage = tabs[0].url;
+		// console.log(tab.url);
+		// alert(tab);
+	   
+		for(i=0;i<pages.length;i++){
+			var page = currentPage.search(pages[i]);
+	    		if(page!=-1){
+	    			check=false;
+					alert("apaga la luz");
+					break;
+				}
+		}
+		if(check)
+			mirar();
 	});
-
 }
 
 
