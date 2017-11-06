@@ -20,7 +20,8 @@ function mirar(){
 			var page = currentPage.search(pages[i]);
 	    		if(page!=-1){
 	    			check=false;
-					alert("apaga la luz");
+					//alert("apaga la luz");
+					window.open("http://192.168.43.75:80/led=0");
 					break;
 				}
 		}
