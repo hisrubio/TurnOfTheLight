@@ -21,7 +21,7 @@ function mirar(){
 	    		if(page!=-1){
 	    			check=false;
 					//alert("apaga la luz");
-					window.open("http://192.168.43.75:80/led=0");
+					window.open("http://172.0.250.180:80/led=0");
 					break;
 				}
 		}

@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // onClick's logic below:
     boton.addEventListener('click', function() {
         //alert("enciende");
-        window.open("http://192.168.43.75:80/led=1");
+        window.open("http://172.0.250.180:80/led=1");
 
     });
 
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     boton.addEventListener('click', function() {
         
         //location.href ="http://192.168.1.53:80/LedOff";
-        window.open("http://192.168.43.75:80/led=0");
+        window.open("http://172.0.250.180:80/led=0");
         //alert("apaga");
     });
 });
