@@ -4,7 +4,7 @@ var pages = [
     /www.netflix.com/i,
     /www.plusdede.com/i,
     /es.hboespana.com/i
-];//buscar lo de entre las barrras y la i no importan Mays o minusculas
+];//buscar lo de entre las barrras, la i para que no importen Mays o minusculas
 var check=true;
 
 mirar();
@@ -17,11 +17,11 @@ function mirar(){
 		// alert(tab);
 	   
 		for(i=0;i<pages.length;i++){
-			var page = currentPage.search(pages[i]);
+			var page = currentPage.search(pages[i]);//search, string method, with regular expresion
 	    		if(page!=-1){
 	    			check=false;
 					//alert("apaga la luz");
-					window.open("http://172.0.250.180:80/led=0");
+					window.open("http://192.168.1.42:80/led=0");
 					break;
 				}
 		}

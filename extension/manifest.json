@@ -1,21 +1,21 @@
 {
   "manifest_version": 2,
-  "name": "Mi Extension",
+  "name": "Luz control",
   "version": "1.0",
  
-  "description": "A plain text description",
+  "description": "turn off the light when netflix opens",
    "background": {
-    "scripts": ["background.js"]
+    "scripts": ["js/background.js"]
     
   },"icons": { 
-    "16": "icon.png",
-    "48": "icon.png",
-    "128": "icon.png" 
+    "16": "res/icon.png",
+    "48": "res/icon.png",
+    "128": "res/icon.png" 
   },
 
   "browser_action": {
     "default_popup" : "popup.html",
-    "default_title" : "mi Extension"
+    "default_title" : "Luz control"
     },
    "permissions": [
       "tabs", "http://*/*", "https://*/*", "alarms"

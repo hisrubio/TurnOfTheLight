@@ -10,7 +10,7 @@ void setup()
   pinMode(13, OUTPUT);
   digitalWrite(13, 1);
 
-  
+  sendData("AT+CWJAP=\"REDWIFI\",\"WIFIPASSWORD\"\r\n", 8000); //conectar wifi
   sendData("AT+CIPMUX=1\r\n", 500); //permite conexiones multiples
   sendData("AT+CIPSERVER=1,80\r\n", 500); //crea un servidor en el puerto 80
   sendData("AT+CIFSR\r\n", 500); //ip del modulo cliente y del servidor, servidor 192.168.1.53
