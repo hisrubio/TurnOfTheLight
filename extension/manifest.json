@@ -5,18 +5,37 @@
  
   "description": "turn off the light when netflix opens",
    "background": {
-    "scripts": ["js/background.js"]
-    
-  },"icons": { 
+    "scripts": ["js/background.js"]   
+  },
+
+  "icons": { 
     "16": "res/icon.png",
     "48": "res/icon.png",
     "128": "res/icon.png" 
+  },
+
+  "commands": {
+    "apagar": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+8"
+      },
+      "description": "Apaga la luz",
+      "global": true
+    },
+    "encender": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9"
+      },
+      "description": "Enciende la luz",
+      "global": true
+    }
   },
 
   "browser_action": {
     "default_popup" : "popup.html",
     "default_title" : "Luz control"
     },
+
    "permissions": [
       "tabs", "http://*/*", "https://*/*", "alarms"
   ]
