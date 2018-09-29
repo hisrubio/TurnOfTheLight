@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Luz control",
-  "version": "1.0",
+  "version": "1.2",
  
   "description": "turn off the light when netflix opens",
    "background": {

@@ -1,23 +1,40 @@
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+function encender(){
+    httpGet("http://192.168.1.42:80/led=1");
+}
+function apagar(){
+    httpGet("http://192.168.1.42:80/led=0");
+}
 
+//accesos directos
 chrome.commands.onCommand.addListener(function(command) {
 	if(command == "apagar"){
-		window.open("http://192.168.1.42:80/led=0");
+		//window.open("http://192.168.1.42:80/led=0");
+		apagar();
     }
     if(command == "encender"){
-		window.open("http://192.168.1.42:80/led=1");
+		//window.open("http://192.168.1.42:80/led=1");
+		encender();
     }
 
 });
 
 var pages = [
     /www.netflix.com/i,
-    /www.plusdede.com/i,
+    /www.megadede.com/i,
     /es.hboespana.com/i
 ];//buscar lo de entre las barrras, la i para que no importen Mays o minusculas
 var check=true;
 
 mirar();
 function mirar(){
+	//chrome.tabs mirar eventos (liseners) onUpdate
 	chrome.tabs.query({ active: true, lastFocusedWindow: true }, function(tabs) {
 	    // and use that tab to fill in out title and url
 	    
@@ -30,7 +47,8 @@ function mirar(){
 	    		if(page!=-1){
 	    			check=false;
 					//alert("apaga la luz");
-					window.open("http://192.168.1.42:80/led=0");
+					//window.open("http://192.168.1.42:80/led=0");
+					apagar();
 					break;
 				}
 		}
