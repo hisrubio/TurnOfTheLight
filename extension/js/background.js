@@ -5,11 +5,28 @@ function httpGet(theUrl)
     xmlHttp.send( null );
     return xmlHttp.responseText;
 }
+
+function httpGetAsync(theUrl, callback)
+{
+	console.log("dentro");
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
+}
+
 function encender(){
-    httpGet("http://192.168.1.42:80/led=1");
+	console.log("encendiendo");
+    //httpGet("http://192.168.1.42:80/led=1");
+    httpGetAsync("http://192.168.1.42:80/led=1", function(){});
 }
 function apagar(){
-    httpGet("http://192.168.1.42:80/led=0");
+	console.log("apagando");
+    //httpGet("http://192.168.1.42:80/led=0");
+    httpGetAsync("http://192.168.1.42:80/led=0", function(){});
 }
 
 //accesos directos
