@@ -21,7 +21,7 @@ function httpGetAsync(theUrl, callback)
 
 function encender(){
 	encendida=true;
-    //alert("enciende");
+    alert("enciende");
 	console.log("encendiendo");
     //httpGet("http://192.168.1.42:80/led=1");
     httpGetAsync("http://192.168.1.42:80/led=1", function(){});
@@ -29,7 +29,7 @@ function encender(){
 }
 function apagar(){
 	encendida=false;
-    //alert("apaga");
+    alert("apaga");
 	console.log("apagando");
     //httpGet("http://192.168.1.42:80/led=0");
     httpGetAsync("http://192.168.1.42:80/led=0", function(){});
@@ -69,6 +69,7 @@ var pages = [
     /es.hboespana.com/i
 ]; //buscar lo de entre las barrras, la i para que no importen Mays o minusculas
 var encendida=true;
+var pageDescargaLibroVip="https://libros-gratis.com/file/?ebookID=%id%&key=1";
 
 //leer url cuando cambia
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)  {
@@ -76,6 +77,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)  {
 	if(oldUrl!=tab.url){
 		oldUrl=tab.url;
 		checkearLuz(tab.url);
+		checkDescargarLibroVip(tab.url);
 	}
 });
 
@@ -86,6 +88,19 @@ function checkearLuz(url){
     		if(page!=-1){
 				apagar();
 				break;
+			}
+		}
+	}
+}
+
+function checkDescargarLibroVip(url){
+	if(url.search(/libros-gratis.com/i) != -1) {
+		if(url.search(/nivel-page/i) != -1) {
+			// (?<=) busca por delante (?=) busca por atras
+			var patt = new RegExp(/(?<=\?.*ebookID=)(\d*)/)
+			var id=patt.exec(url)[0];
+			if(id){
+				window.open(pageDescargaLibroVip.replace("%id%", id));
 			}
 		}
 	}
