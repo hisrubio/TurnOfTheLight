@@ -1,3 +1,4 @@
+
 function httpGet(theUrl)
 {
     var xmlHttp = new XMLHttpRequest();
@@ -19,64 +20,73 @@ function httpGetAsync(theUrl, callback)
 }
 
 function encender(){
+	encendida=true;
+    //alert("enciende");
 	console.log("encendiendo");
     //httpGet("http://192.168.1.42:80/led=1");
     httpGetAsync("http://192.168.1.42:80/led=1", function(){});
+	//window.open("http://192.168.1.42:80/led=1");
 }
 function apagar(){
+	encendida=false;
+    //alert("apaga");
 	console.log("apagando");
     //httpGet("http://192.168.1.42:80/led=0");
     httpGetAsync("http://192.168.1.42:80/led=0", function(){});
+	//window.open("http://192.168.1.42:80/led=0");
 }
 
 //accesos directos
 chrome.commands.onCommand.addListener(function(command) {
 	if(command == "apagar"){
-		//window.open("http://192.168.1.42:80/led=0");
 		apagar();
     }
     if(command == "encender"){
-		//window.open("http://192.168.1.42:80/led=1");
 		encender();
     }
-
 });
 
+//botones del popup.html
+document.addEventListener('DOMContentLoaded', function() {
+    var boton = document.getElementById('boton');
+    boton.addEventListener('click', function() {
+        encender();
+    });
+
+    var boton = document.getElementById('botonOff');
+    boton.addEventListener('click', function() {
+        apagar();
+    });
+});
+
+
+
+
+var oldUrl;
 var pages = [
     /www.netflix.com/i,
     /www.megadede.com/i,
     /es.hboespana.com/i
-];//buscar lo de entre las barrras, la i para que no importen Mays o minusculas
-var check=true;
+]; //buscar lo de entre las barrras, la i para que no importen Mays o minusculas
+var encendida=true;
 
-mirar();
-function mirar(){
-	//chrome.tabs mirar eventos (liseners) onUpdate
-	chrome.tabs.query({ active: true, lastFocusedWindow: true }, function(tabs) {
-	    // and use that tab to fill in out title and url
-	    
-		var currentPage = tabs[0].url;
-		// console.log(tab.url);
-		// alert(tab);
-	   
-		for(i=0;i<pages.length;i++){
-			var page = currentPage.search(pages[i]);//search, string method, with regular expresion
-	    		if(page!=-1){
-	    			check=false;
-					//alert("apaga la luz");
-					//window.open("http://192.168.1.42:80/led=0");
-					apagar();
-					break;
-				}
+//leer url cuando cambia
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)  {
+	//alert(changeInfo.status +" "+ changeInfo.url);
+	if(oldUrl!=tab.url){
+		oldUrl=tab.url;
+		checkearLuz(tab.url);
+	}
+});
+
+function checkearLuz(url){
+	if(encendida){
+		for(i=0; i<pages.length; i++){
+			var page = url.search(pages[i]); //search, string method, with regular expresion
+    		if(page!=-1){
+				apagar();
+				break;
+			}
 		}
-		if(check)
-			mirar();
-	});
+	}
 }
-
-
-
-	
-
-
-	
