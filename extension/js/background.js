@@ -21,7 +21,7 @@ function httpGetAsync(theUrl, callback)
 
 function encender(){
 	encendida=true;
-    alert("enciende");
+    //alert("enciende");
 	console.log("encendiendo");
     //httpGet("http://192.168.1.42:80/led=1");
     httpGetAsync("http://192.168.1.42:80/led=1", function(){});
@@ -29,7 +29,7 @@ function encender(){
 }
 function apagar(){
 	encendida=false;
-    alert("apaga");
+    //alert("apaga");
 	console.log("apagando");
     //httpGet("http://192.168.1.42:80/led=0");
     httpGetAsync("http://192.168.1.42:80/led=0", function(){});
